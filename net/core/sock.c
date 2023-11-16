@@ -479,6 +479,8 @@ int __sock_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
 	struct sk_buff_head *list = &sk->sk_receive_queue;
 
 	if (atomic_read(&sk->sk_rmem_alloc) >= sk->sk_rcvbuf) {
+		printk("in __sock_queue_rcv_skb, &sk->sk_rmem_alloc=%d", sk->sk_rmem_alloc);
+		printk("in __sock_queue_rcv_skb, &sk->sk_rcvbuf=%d", sk->sk_rcvbuf);
 		atomic_inc(&sk->sk_drops);
 		trace_sock_rcvqueue_full(sk, skb);
 		return -ENOMEM;

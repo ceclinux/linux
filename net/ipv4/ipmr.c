@@ -1079,6 +1079,8 @@ static int ipmr_cache_report(struct mr_table *mrt,
 	rcu_read_unlock();
 	if (ret < 0) {
 		net_warn_ratelimited("mroute: pending queue full, dropping entries\n");
+		printk("in ipmr_cache_report, &sk->sk_rmem_alloc=%d", mroute_sk->sk_rmem_alloc);
+		printk("in ipmr_cache_report, &sk->sk_rcvbuf=%d", mroute_sk->sk_rcvbuf);
 		kfree_skb(skb);
 	}
 
